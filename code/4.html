@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>4.html</title>
+</head>
+<body>
+	<div id="app">
+		<form>
+			<div>
+				用户名
+				<input type="text" v-model="name">
+			</div>
+			<div>
+				密码：
+				<input type="password" @keyup.13="handSubmit" v-model="password">
+			</div>
+			<div>
+				<input type="button" @click="handSubmit" value="提交">
+			</div>
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript"> 
+	var vm=new Vue({
+		el: '#app',
+		data: {
+			name:"",
+			password:"",
+		},
+		methods:{
+			handSubmit: function(){
+				console.log(this.name,this.password);
+			},
+		},
+	});
+</script>
+</html>
