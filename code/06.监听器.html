@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>监听器</title>
+</head>
+<body>
+	<div id="app">
+		姓氏：
+		<input type="text" v-model='firstName'><br>
+		名字：
+		<input type="text" v-model='lastName'><br>
+		姓名：{{fullName}}<br>
+		<div>
+			用户名：
+			<input type="text" v-model.lazy="name"/><span v-text='msg'></span>
+		</div>
+
+	</div>
+	
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	var vm=new Vue({
+		el: '#app',
+		data: {
+			lastName:'',
+			firstName:'',
+			fullName:'',
+			name:'',
+			msg:'',
+		},
+		
+		watch: {
+			firstName: function(val){
+				this.fullName=this.firstName+" "+this.lastName;
+			},
+			lastName: function(val){
+				this.fullName=this.firstName+" "+this.lastName;
+			},
+			name: function(val){
+				this.checkName(val);
+				this.msg='正在验证';
+			},
+		},
+
+		methods: {
+			checkName: function(name){
+				
+				var that=this;
+				setTimeout(function(){
+					if(name=="abc"){
+						that.msg='用户名已存在';
+					}else{
+						that.msg='用户名可用';
+					}
+				},2000);
+			},
+		},
+	});
+</script>
+</html>

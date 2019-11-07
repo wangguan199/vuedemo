@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>表单域修饰符</title>
+</head>
+
+<body>
+    <div id="app">
+        姓名
+        <input type="text" v-model.trim="name">
+        <button @click="trim">点击</button>
+        <br> 年龄
+        <input type="number" v-model.number="age">
+        <button @click='handle'>计算</button>
+        <br>
+        <input type="text" v-model.lazy="hobby">
+        <span>您的爱好是：{{hobby}}</span>
+    </div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+var vm = new Vue({
+    el: '#app',
+    data: {
+        name: '',
+        age: '',
+        hobby: '',
+    },
+    methods: {
+        handle: function() {
+            console.log(this.age + 10);
+        },
+        trim: function() {
+            console.log(this.name);
+        },
+    },
+});
+</script>
+
+</html>

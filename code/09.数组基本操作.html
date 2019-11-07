@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>数组操作</title>
+</head>
+<body>
+	<div id="app">
+		<div>
+			<input type="type" v-model="fname">
+			<button @click='add'>添加</button>
+			<button @click='delSelect()'>删除</button>
+		</div>
+		<ul>
+			<li v-for='(obj,index) in list' :key='index'>{{obj}}</li>
+		</ul>
+		<div>
+			<button @click='del'>删除</button>
+			<button @click='change'>替换</button>
+		</div>
+		<div>
+			<input type="text" v-model='fname1'>
+			<input type="text" v-model='fname2'>
+			<button @click='addAll'>批量添加</button>
+		</div>
+		<div>
+			<input type="text" v-model='fname3'>
+			<input type="text" v-model='fname4'>
+			<button @click='replace'>替换</button>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+
+	var ve=new Vue({
+		el: '#app',
+		data:{
+			list:['apple','orange','bnana'],
+			fname: '',
+			fname1:'',
+			fname2:'',
+			fname3:'',
+			fname4:'',
+		},
+		methods:{
+			add: function(){
+				this.list.push(this.fname);
+			},
+			
+			del: function(){
+				this.list.pop();
+			},
+			change: function(){
+				//参数原数组起始下标，结束下标，使用list.slice生成新的数组
+				this.list=this.list.slice(1,3);
+			},
+			addAll:function(){
+				var arr = new Array(2);
+				arr[0]=this.fname1;
+				arr[1]=this.fname2;
+				this.list=this.list.concat(arr);
+			},
+			replace: function(){
+				
+				//响应式修改数值数据
+				Vue.set(ve.list,this.arrIndex(this.fname3,this.list),this.fname4);
+				
+			},
+
+			arrIndex: function(obj,arr){
+				for (var i = 0; i <= arr.length; i++) {
+					
+					if(obj==arr[i]){
+						return i;
+					}
+				}
+			},
+
+		},
+		
+	});
+</script>
+</html>

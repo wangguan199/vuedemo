@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>自定义指令</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" name="">
+        <input type="text" v-focus name="">
+    </div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+//自定义指令,focus指令名字，自动获取焦点
+Vue.directive('focus', {
+    inserted: function(el) {
+        //el表示指令所表示的元素
+        el.focus();
+    }
+});
+var vm = new Vue({
+    el: '#app',
+    data: {
+
+    },
+    methods: {
+
+    },
+});
+</script>
+
+</html>

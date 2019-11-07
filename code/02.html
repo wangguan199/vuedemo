@@ -6,7 +6,9 @@
 <body>
 	<div id="app">
 		<span v-text="msg"></span>
+		<!-- v-pre不进行编译 -->
 		<div v-pre>{{msg}}</div>
+		<!-- v-once编译只一次 -->
 	</div>
 </body>
 <script type="text/javascript" src="js/vue.js"></script>
