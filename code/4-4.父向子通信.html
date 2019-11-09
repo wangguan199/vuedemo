@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>父向子通信</title>
+</head>
+<body>
+	<div id="app">
+		<div>{{msg}}</div>
+		<menu-item :title='msg' :pstr='pstr' :pboo='pboo' :pnum='pnum' :parr='parr' :pobj='pobj'></menu-item>
+	</div>
+
+
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('menu-item',{
+		props:['title','pstr','pboo','pnum','parr','pobj'],
+		data:function(){
+			return {
+				msg: '这里是子组件的值',
+			}
+		},
+		template: `
+			<div>
+				{{msg+'------'+title}}<br>
+				{{pstr}}<br>
+				{{typeof pnum}}<br>
+				{{typeof pboo}}<br>
+				
+				<ul>
+					<li v-for='(item,index) in parr' :key='index'>{{item}}</li>
+				</ul>
+				<ul>
+					<li v-for='(val,key,index) in pobj' :key='index'>{{key}}:{{val}}</li>
+
+				</ul>
+
+			</div>
+		`,
+		});
+
+	var vm=new Vue({
+		el:"#app",
+		data: {
+			msg:'这里是父组件的值',
+			pstr: 'hello',
+			pnum: 5,
+			pboo: false,
+			parr: ['apple','orange','banana'],
+			pobj:{
+				id:1,
+				name:'张三',
+			},
+		},
+	
+	});
+</script>
+</html>

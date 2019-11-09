@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>父向子通信</title>
+</head>
+<body>
+	<div id="app">
+		
+		<menu-item  :parr='parr' @add='add($event)'></menu-item>
+	</div>
+
+
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('menu-item',{
+		props:['parr'],
+		data:function(){
+			return {
+				fruits:'',
+			}
+		},
+		
+		template: `
+			<div>
+				
+				
+				<ul>
+					<li v-for='(item,index) in parr' :key='index'>{{item}}</li>
+				</ul>
+				<input type="text" v-model='fruits'/>
+				
+				<button @click="$emit('add',fruits)">添加</button>
+				
+
+			</div>
+		`,
+		
+		});
+
+	var vm=new Vue({
+		el:"#app",
+		data: {
+			
+			parr: ['apple','orange','banana'],
+			
+		},
+		methods:{
+			add: function(fruits){
+				this.parr.push(fruits);
+			},
+		},
+	
+	});
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>插槽的作用域</title>
+	<style type="text/css">
+	  .current {
+	    color: orange;
+	  }
+	</style>
+</head>
+<body>
+	<div id="app">
+		<fruit-list :list='list'>
+			<!-- 通过slot-scope获取子组件中slot通过:info='item'传递的参数item -->
+			<template slot-scope='slotProps'>
+
+				<strong class='current' v-if='slotProps.info.id==2'>{{slotProps.info.name}}</strong>
+				<span v-else>{{slotProps.info.name}}</span>
+			</template>
+		</fruit-list>
+		
+
+	</div>
+
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('fruit-list',{
+		props:['list'],
+		template: `
+			<div>
+				<ul>
+					<li v-for='(item,index) in list' :key='item.id'>
+						<slot :info='item'>{{item.name}}</slot>
+					</li>
+
+				</ul>
+				
+			</div>
+		`,
+	});
+
+	var vm=new Vue({
+		el:'#app',
+		data:{
+			list:[
+				{
+					id:1,
+					name:'apple',
+				},
+				{
+					id:2,
+					name:'orange',
+				},
+				{
+					id:3,
+					name:'banana',
+				},
+
+			],
+		},
+	});
+</script>
+</html>

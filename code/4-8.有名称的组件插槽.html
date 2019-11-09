@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>有名称的组件插槽</title>
+</head>
+<body>
+	<div id="app">
+		<base-layout>
+
+			<p slot='handle'>标题信息</p>
+			<p>主要内容</p>
+			<p slot='footer'>底部信息</p>
+		</base-layout>
+
+		<base-layout>
+			<template slot='handle'>
+				<p>标题信息</p>
+			</template>
+			<template slot='handle'>
+				<p>主要内容</p>
+			</template>
+			<template slot='footer'>
+				<p>底部信息</p>
+			</template>	
+		</base-layout>
+
+
+	</div>
+
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('base-layout',{
+		
+		template: `
+			<div>
+				<header>
+					<slot name='handle'></slot>
+				</header>
+				<main>
+					<slot></slot>
+				</main>
+				<footer>
+					<slot name='footer'></slot>
+				</footer>
+
+			</div>
+		`,
+	});
+
+	var vm=new Vue({
+		el:'#app',
+		data:{},
+	});
+</script>
+</html>

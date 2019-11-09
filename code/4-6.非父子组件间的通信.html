@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>父向子通信</title>
+</head>
+<body>
+	<div id="app">
+		
+		<menu-item1 ></menu-item1>
+		<menu-item2 ></menu-item2>
+	</div>
+
+
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	//提供事件中心
+	var eventHub=new Vue();
+
+	Vue.component('menu-item2',{
+		
+		data:function(){
+			return {
+				num:0,
+			}
+		},
+		
+		template: `
+			<div>
+				
+				
+			<h3>这里是子组件2</h3>
+				子组件1点击了{{num}}次<br>
+				<button @click="handle">点击</button>
+				
+
+			</div>
+		`,
+		methods:{
+			handle:function(){
+				//触发兄弟组件的事件
+				eventHub.$emit('jerry-event',1);
+			},
+		},
+		mounted:function(){
+			//监听事件,val参数由兄弟组件传入
+			eventHub.$on('tom-event',(val)=>{
+				this.num+=val;
+			});
+		},
+		
+		});
+	Vue.component('menu-item1',{
+		
+		data:function(){
+			return {
+				num:0,
+			}
+		},
+		
+		template: `
+			<div>
+				
+				
+			<h3>这里是子组件1</h3>
+				子组件2点击了{{num}}次<br>
+				<button @click="handle">点击</button>
+				
+
+			</div>
+		`,
+		methods:{
+			handle:function(){
+				//触发兄弟组件的事件
+				eventHub.$emit('tom-event',1);
+			},
+		},
+		mounted:function(){
+			//监听事件,val参数由兄弟组件传入
+			eventHub.$on('jerry-event',(val)=>{
+				this.num+=val;
+			});
+		},
+		
+		});
+
+	var vm=new Vue({
+		el:"#app",
+		data: {
+			
+			
+		},
+		
+	
+	});
+</script>
+</html>

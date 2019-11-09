@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>组件插槽</title>
+</head>
+<body>
+	<div id="app">
+		<alert-box></alert-box>
+		<alert-box>这里可以传值到slot标签</alert-box>
+		<alert-box>这里可以传值到slot标签。。。</alert-box>
+		<alert-box>这里可以传值到slot标签...</alert-box>
+
+	</div>
+
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('alert-box',{
+		
+		template: `
+			<div>
+				<slot>这里可以接收,也可以有默认内容</solt>
+			</div>
+		`,
+	});
+
+	var vm=new Vue({
+		el:'#app',
+		data:{},
+	});
+</script>
+</html>

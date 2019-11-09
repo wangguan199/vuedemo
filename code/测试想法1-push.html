@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>push</title>
+	<style type="text/css">
+       .grid {
+      margin: auto;
+      width: 530px;
+      text-align: center;
+    }
+    .grid table {
+      border-top: 1px solid #C2D89A;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .grid th,td {
+      padding: 10;
+      border: 1px dashed #F3DCAB;
+      height: 35px;
+      line-height: 35px;
+    }
+    .grid th {
+      background-color: #F3DCAB;
+    }
+    .grid .book {
+      padding-bottom: 10px;
+      padding-top: 5px;
+      background-color: #F3DCAB;
+    }
+  </style>
+</head>
+
+<body>
+	<div id="app">
+		
+
+		<div class="grid">
+			<div class="book">
+				<div>
+					<label for="id">
+						编号：
+					</label>
+					<input type="text" id="id" v-model="id">
+					<label for="name">
+						名称：
+					</label>
+					<input type="text" v-model="name">
+					<button @click='add'>添加</button>
+					<button @click='add1'>添加1</button>
+					<button @click='add2'>添加2</button>
+>
+				</div>
+			</div>
+			<div class="book">
+				<div>
+					
+					<button @click='addName'>添加</button>
+					<button @click='addName1'>添加1</button>
+					
+>
+				</div>
+			</div>
+			<table>
+				<thead>
+					<tr>
+		            <th>编号</th>
+		            <th>名称</th>
+		            <th>时间</th>
+		            <th>操作</th>
+		          </tr>
+				</thead>
+				<tbody>
+					<tr v-for='item in books' :key='item.id'>
+						<td>{{item.id}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.date}}</td>
+						<td>
+			              <a href="" @click.prevent>修改</a>
+			              <span>|</span>
+			              <a href="" @click.prevent>删除</a>
+			            </td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+  <script type="text/javascript">
+    /*
+      图书管理-图书列表展示功能
+      注意事项：<a href="" @click.prevent>修改</a>
+      事件绑定时，可以只添加修饰符，而不绑定事件函数
+    */
+    var vm = new Vue({
+      el: '#app',
+      data: {
+      	
+      	id:'',
+      	name:'',
+      	book:{
+          id: 123,
+          name: '456',
+          date: ''
+        },
+      	name1:'',
+      	names:['三国演义','水浒传','红楼梦'],
+        books: [{
+          id: 1,
+          name: '三国演义',
+          date: ''
+        },{
+          id: 2,
+          name: '水浒传',
+          date: ''
+        },{
+          id: 3,
+          name: '红楼梦',
+          date: ''
+        },{
+          id: 4,
+          name: '西游记',
+          date: ''
+        }]
+      },
+
+      methods:{
+      	add: function(){
+      		
+      		this.book.id=123;
+      		this.book.name='456';
+      		this.books.push(this.book);
+
+      		//置空
+      		this.id='';
+      		this.name='';
+			//this.book='';
+      	},
+      	add1: function(){
+      		
+      		
+      		this.book.name='159';
+      		this.books.push(this.book);
+
+      		//置空
+      		this.id='';
+      		this.name='';
+			//this.book='';
+      	},
+      	add2: function(){
+      		
+      		this.book.id=753;
+      		this.book.name='666';
+      		
+
+      		//置空
+      		this.id='';
+      		this.name='';
+			//this.book='';
+      	},
+      	addName: function(){
+      		
+      		this.name1='123';
+      		
+      		this.names.push(this.name1);
+
+      		//置空
+      		this.name1='';
+      		
+      		
+      	},
+      	addName1: function(){
+      		
+      		this.name1='456';
+      		
+      		this.names.push(this.name1);
+
+      		//置空
+      		this.name1='';
+      		
+      		
+      	},
+
+
+      },
+      
+    });
+  </script>
+</html>
